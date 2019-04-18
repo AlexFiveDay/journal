@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace：匹配的Java接口 -->
+<mapper namespace="journal.system.journal.mapper.UserMapper">
+	<!-- 根据将要执行的SQL语句的类型选择节点 -->
+	<!-- id：对应的抽象方法的方法名 -->
+	<!-- 在SQL语句中的?应该使用#{}来占位 -->
+	<!-- 在#{}中的名称是参数User类中的属性名 -->
+	<!-- 插入用户数据 -->
+	<!-- Integer insert(User user) -->
+	<insert id="insert">
+		INSERT INTO 
+		t_user 
+		(uid,username,password,phone,is_delete,created_user,created_time,modified_user,modified_time) 
+		VALUES
+		(null,#{username},#{password},#{phone},#{isDelete},#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime});
+	</insert>
+	<!-- User findByUsername(String username); -->
+	<select id="findByUsername" resultType="journal.system.journal.entity.User">
+		SELECT is_delete,password,salt FROM t_user WHERE username=#{username};
+	</select>
+</mapper>
